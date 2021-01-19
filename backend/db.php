@@ -203,8 +203,10 @@
                 while($post_data = $result->fetch_assoc()){
                     $post_array = array();
 
+                    $post_array["id"] = $post_data["id"];
                     $post_array["author"] = $post_data["author"];
                     $post_array["content"] = $post_data["content"];
+                    $post_array["date"] = $post_data["date"];
 
                     array_push($posts, $post_array);
                 }
@@ -217,6 +219,55 @@
                 );
 
                 return $resp;
+            }
+        }
+
+        public function add_comment($nick, $post_id, $content){
+            $nick = $this->sanitize($nick);
+            $post_id = $this->sanitize($post_id);
+            $content = $this->sanitize(nl2br($content));
+            $date = date("Y-m-d");
+
+            $insert_sql = "INSERT INTO `comments` (`id`, `post_id`, `content`, `author`, `date`) VALUES (null, $post_id, '$content', '$nick', '$date')";
+
+            $this->conn->query($insert_sql);
+        }
+
+        public function delete_comment($nick, $comment_id){
+            $nick = $this->sanitize($nick);
+            $comment_id = $this->sanitize($comment_id);
+
+            if($nick == $this->is_comment_author($nick, $comment_id)){
+                $delete_sql = "DELETE FROM `comments` WHERE `id`=$comment_id";
+
+                $this->conn->query($delete_sql);
+
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+
+        private function is_comment_author($nick, $comment_id){
+            $sql = "SELECT * FROM `comments` WHERE `id`=$comment_id";
+
+            $result = $this->conn->query($sql);
+
+            if($result->num_rows > 0){
+                $comment_data = $result->fetch_assoc();
+
+                $author = $comment_data["author"];
+
+                if($author === $nick){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+            else{
+                return false;
             }
         }
     }

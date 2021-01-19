@@ -39,6 +39,7 @@
     <link rel="stylesheet" href="../../css/logo.css">
     <link rel="stylesheet" href="../../css/font.css">
     <link rel="stylesheet" href="../../css/post.css">
+    <link rel="stylesheet" href="../../css/form.css">
 </head>
 <body>
     <nav>
@@ -49,7 +50,7 @@
             <a class="button" href="../../index.php">Main</a>
             <?php
                 echo <<<ENDL
-                    <a class="button" href="user/profile/?nick=$nick">Your Profile</a>
+                    <a class="button" href="../../user/profile/?nick=$nick">Your Profile</a>
                 ENDL;
             ?>
             <a class="button" href="../../backend/logout.php">Logout</a>
@@ -75,31 +76,79 @@
                 ?>
             </span>
         </div>
-        <div id="comments">
-            <?php
-                $resp = $db->get_comments($id);
-
-                if($resp["code"] === 404){
-                    echo "Comments not found :(";
-                }
-                else{
-                    unset($resp["code"]);
-
-                    foreach($resp as $post_data){
-                        $content = $post_data["content"];
-                        $author = $post_data["author"];
-
+        <div id="comments-section">
+            <div id="comment-add">
+                <form action="../../backend/add-comment.php" method="post">
+                    <textarea name="content"></textarea>
+                    <?php
                         echo <<<ENDL
-                            <div class="comment">
-                                <span class="content">$content</span>
-                                <br><br>
-                                <span class="author">$author</span>
-                            </div>
+                        <input value="$id" name="post_id" style="display: none;">
                         ENDL;
+                    ?>
+                    <br><br>
+                    <input type="submit" value="Comment">
+                </form>
+            </div>
+            <div id="comments">
+                <?php
+                    $resp = $db->get_comments($id);
+
+                    if($resp["code"] === 404){
+                        echo "Comments not found :(";
                     }
-                }
-            ?>
+                    else{
+                        unset($resp["code"]);
+
+                        foreach($resp as $post_data){
+                            $comment_id = $post_data["id"];
+                            $content = $post_data["content"];
+                            $author = $post_data["author"];
+                            $date = $post_data["date"];
+
+                            if($author === $nick){
+                                echo <<<ENDL
+                                    <div class="comment">
+                                        <span class="content">$content</span><a class="remove-button" href="../../backend/delete-comment.php?post_id=$id&comment_id=$comment_id">Delete</a>
+                                        <br><br>
+                                        <span class="author">$author</span><span class="date">$date</span>
+                                    </div>
+                                ENDL;
+                            }
+                            else{
+                                echo <<<ENDL
+                                    <div class="comment">
+                                        <span class="content">$content</span>
+                                        <br><br>
+                                        <span class="author">$author</span><span class="date">$date</span>
+                                    </div>
+                                ENDL;
+                            }
+                        }
+                    }
+                ?>
+            </div>
         </div>
     </main>
 </body>
 </html>
+<?php
+    // Error codes handling
+    if(isset($_GET['code'])){
+        $code = $_GET['code'];
+
+        if($code === "200"){
+            echo <<<ENDL
+            <script>
+                alert("Comment deleted successfully.");
+            </script>
+            ENDL;
+        }
+        else if($code === "403"){
+            echo <<<ENDL
+            <script>
+                alert("You are not owner of this comment!");
+            </script>
+            ENDL;
+        }
+    }
+?>
