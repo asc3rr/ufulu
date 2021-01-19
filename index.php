@@ -105,5 +105,8 @@
             }
         ?>
     </main>
+    <footer>
+        <?php echo date("Y"); ?> All rights reserved for ufulu.com&copy
+    </footer>
 </body>
 </html>

@@ -1,8 +1,22 @@
 main{
     margin-top: 5%;
+    margin-bottom: 5%;
 
     width: 80%;
 
     margin-right: auto;
     margin-left: auto;
+}
+footer{
+    margin-top: 5%;
+    margin-bottom: 5%;
+
+    width: 80%;
+
+    margin-right: auto;
+    margin-left: auto;
+
+    text-align: center;
+
+    color: gray;
 }
