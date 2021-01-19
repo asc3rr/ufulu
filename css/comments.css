@@ -5,7 +5,17 @@
     width: 50%;
 
     margin-top: 2.5%;
+    margin-bottom: 2.5%;
 }
+#comment-add{
+    float: right;
+    margin-right: 2.5%;
+}
+#comment-seciont{
+    float: left;
+    margin-left: 2.5%;
+}
+
 .comment{
     margin-bottom: 1%;
 
@@ -13,8 +23,27 @@
 
     padding: 0.5%;
 }
-
 .author{
     font-size: 90%;
     color: red;
+}
+.date{
+    margin-left: 1%;
+    font-size: 90%;
+
+    color: gray;
+}
+
+.remove-button{
+    text-decoration: none;
+
+    float: right;
+    margin-right: 1%;
+
+    background-color: red;
+    color: white;
+
+    padding: 0.5%;
+
+    border-radius: 10px;
 }
