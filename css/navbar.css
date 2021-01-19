@@ -1,0 +1,42 @@
+nav{
+    position: fixed;
+
+    width: 100%;
+
+    left: 0;
+    top: 0;
+
+    background-color: #222222;
+
+    padding: 1%;
+}
+
+/* logo */
+#logo-section{
+    margin-left: 2.5%;
+    float: left;
+}
+
+/* buttons section */
+#buttons{
+    margin-right: 5%;
+    float: right;
+
+    width: 50%;
+
+    text-align: end;
+}
+
+.button{
+    text-decoration: none;
+    color: white;
+
+    padding: 0.5%;
+
+    border-radius: 10px;
+
+    transition: .3s ease-in;
+}
+.button:hover{
+    background-color: #019b4b;
+}

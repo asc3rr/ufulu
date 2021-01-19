@@ -1,0 +1,36 @@
+.post{
+    padding: 0.5%;
+
+    margin-bottom: 2.5%;
+}
+.post-author{
+    color: red;
+}
+.post-date{
+    font-size: 80%;
+
+    color: gray;
+}
+.post-content{
+    margin-top: 5%;
+}
+
+.profile-link{
+    text-decoration: none;
+    color: red;
+}
+.profile-link:hover{
+    text-decoration: underline;
+}
+
+.comments{
+    float: right;
+}
+
+.link{
+    text-decoration: none;
+    color: white;
+}
+.link:hover{
+    text-decoration: underline;
+}

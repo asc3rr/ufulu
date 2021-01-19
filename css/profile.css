@@ -1,0 +1,21 @@
+main{
+    margin-right: auto;
+    margin-left: auto;
+
+    width: 50%;
+}
+
+.user-nick{
+    font-size: 150%;
+
+    color: red;
+}
+
+.edit-profile{
+    text-decoration: none;
+
+    background-color: #00AF54;
+    color: white;
+
+    padding: 1%;
+}
