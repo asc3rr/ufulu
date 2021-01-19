@@ -5,6 +5,8 @@
         header("Location: login/");
     }
 
+    $nick = $_SESSION['nick'];
+
     require_once("../../backend/db.php");
 
     $db = new DB();
@@ -14,10 +16,10 @@
     $owner = false;
 
     if($profile_data["code"] == 200){
-        $nick = $profile_data["nick"];
+        $profile_nick = $profile_data["nick"];
         $bio = $profile_data["bio"];
 
-        if($nick === $_GET['nick']){
+        if($nick === $profile_nick){
             $owner = true;
         }
     }
@@ -53,7 +55,7 @@
         </div>
     </nav>
     <main>
-        <span class="user-nick"><?php echo $nick; ?></span>
+        <span class="user-nick"><?php echo $profile_nick; ?></span>
         <br><br>
         <span class="user-bio"><?php echo $bio; ?></span>
         <br><br><br>
