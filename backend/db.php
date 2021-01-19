@@ -237,38 +237,18 @@
             $nick = $this->sanitize($nick);
             $comment_id = $this->sanitize($comment_id);
 
-            if($nick == $this->is_comment_author($nick, $comment_id)){
-                $delete_sql = "DELETE FROM `comments` WHERE `id`=$comment_id";
+            $delete_sql = "DELETE FROM `comments` WHERE `id`=$comment_id AND `author`='$nick'";
 
-                $this->conn->query($delete_sql);
-
-                return true;
-            }
-            else{
-                return false;
-            }
+            $this->conn->query($delete_sql);
         }
 
-        private function is_comment_author($nick, $comment_id){
-            $sql = "SELECT * FROM `comments` WHERE `id`=$comment_id";
+        public function delete_post($nick, $post_id){
+            $nick = $this->sanitize($nick);
+            $post_id = $this->sanitize($post_id);
 
-            $result = $this->conn->query($sql);
+            $delete_sql = "DELETE FROM `posts` WHERE `id`=$post_id AND `author`='$nick'";
 
-            if($result->num_rows > 0){
-                $comment_data = $result->fetch_assoc();
-
-                $author = $comment_data["author"];
-
-                if($author === $nick){
-                    return true;
-                }
-                else{
-                    return false;
-                }
-            }
-            else{
-                return false;
-            }
+            $this->conn->query($delete_sql);
         }
     }
 ?>

@@ -12,12 +12,7 @@
     require_once("db.php");
 
     $db = new DB();
-    $result = $db->delete_comment($nick, $comment_id);
+    $db->delete_comment($nick, $comment_id);
 
-    if($result){
-        header("Location: ../post/view/?id=$post_id&code=200");
-    }
-    else{
-        header("Location: ../post/view/?id=$post_id&code=403");
-    }
+    header("Location: ../post/view/?id=$post_id");
 ?>

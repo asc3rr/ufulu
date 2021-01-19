@@ -12,4 +12,6 @@
     
     $db = new DB();
     $db->delete_post($nick, $post_id);
+
+    header("Location: ../");
 ?>
