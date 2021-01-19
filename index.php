@@ -61,20 +61,43 @@
 
                     $content = substr($content, 0, 100);
 
-                    echo <<<ENDL
-                    <article class="post">
-                        <a class="profile-link" href="user/profile/?nick=$author">
-                            <span class="post-author">$author</span>
-                        </a><br>
-                        <span class="post-date">$date</span><br>
-                        <span class="post-content">
-                            $content
-                        </span>
-                        <span class="comments">
-                            <a class="link" href="post/view/?id=$id">View post</a>
-                        </span>
-                    </article>
-                    ENDL;
+                    if($nick === $author){
+                        echo <<<ENDL
+                        <article class="post">
+                            <a class="profile-link" href="user/profile/?nick=$author">
+                                <span class="post-author">$author</span>
+                            </a>
+                            <a class="remove-button" href="backend/delete-post.php?post_id=$id">Delete</a>
+                            <br>
+                            <span class="post-date">$date</span>
+                            <br>
+                            <span class="post-content">
+                                $content
+                            </span>
+                            <span class="comments">
+                                <a class="link" href="post/view/?id=$id">View post</a>
+                            </span>
+                        </article>
+                        ENDL;
+                    }
+                    else{
+                        echo <<<ENDL
+                        <article class="post">
+                            <a class="profile-link" href="user/profile/?nick=$author">
+                                <span class="post-author">$author</span>
+                            </a>
+                            <br>
+                            <span class="post-date">$date</span>
+                            <br>
+                            <span class="post-content">
+                                $content
+                            </span>
+                            <span class="comments">
+                                <a class="link" href="post/view/?id=$id">View post</a>
+                            </span>
+                        </article>
+                        ENDL;
+                    }
                 }
             }
             else{
