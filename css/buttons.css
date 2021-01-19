@@ -1,3 +1,36 @@
 #buttons{
+    margin-right: 5%;
     float: right;
+
+    width: 50%;
+
+    text-align: end;
+}
+
+.button{
+    text-decoration: none;
+    color: white;
+
+    padding: 0.5%;
+
+    border-radius: 10px;
+
+    transition: .3s ease-in;
+}
+.button:hover{
+    background-color: #019b4b;
+}
+
+.remove-button{
+    text-decoration: none;
+
+    float: right;
+    margin-right: 1%;
+
+    background-color: red;
+    color: white;
+
+    padding: 0.5%;
+
+    border-radius: 10px;
 }
