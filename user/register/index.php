@@ -42,5 +42,12 @@
             </script>
             ENDL;
         }
+        else if($code == 400){
+            echo <<<ENDL
+            <script>
+                alert("Not enough parameters");
+            </script>
+            ENDL;
+        }
     }
 ?>
