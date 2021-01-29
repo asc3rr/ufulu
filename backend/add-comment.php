@@ -4,7 +4,7 @@
     if(!isset($_SESSION['nick'])){
         header("Location: ../user/login/");
     }
-    if(isset($_POST["post_id"]) && !empty($_POST["post_id"]) && isset($_POST["content"]) && !empty($_POST["content"])){
+    if(!isset($_POST["post_id"]) && empty($_POST["post_id"]) && !isset($_POST["content"]) && empty($_POST["content"])){
         header("Location: ../");
         die;
     }
