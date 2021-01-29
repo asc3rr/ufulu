@@ -1,8 +1,8 @@
 <?php
     require_once("db.php");
 
-    if(!isset($_POST['nick']) && empty($_POST['nick']) && !isset($_POST['pass1']) && empty($_POST['pass1']) && !isset($_POST['pass2']) && empty($_POST['pass2'])){
-        header("Location: ../");
+    if(!isset($_POST['nick']) || empty($_POST['nick']) || !isset($_POST['pass1']) || empty($_POST['pass1']) || !isset($_POST['pass2']) || empty($_POST['pass2'])){
+        header("Location: ../user/register/?code=400");
         die;
     }
 
