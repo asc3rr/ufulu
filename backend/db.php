@@ -16,8 +16,13 @@
             $this->conn->close();
         }
 
-        public function sanitize($data){
-            return mysqli_real_escape_string($this->conn, $data);
+        public function sanitize($data, $html_entities=false){
+            if(!$html_entities){
+                return mysqli_real_escape_string($this->conn, $data);
+            }
+            else{
+                return mysqli_real_escape_string($this->conn, htmlentities($data, ENT_QUOTES, "utf-8"));
+            }
         }
 
         public function login($nick, $password){
@@ -225,7 +230,7 @@
         public function add_comment($nick, $post_id, $content){
             $nick = $this->sanitize($nick);
             $post_id = $this->sanitize($post_id);
-            $content = $this->sanitize(nl2br($content));
+            $content = $this->sanitize(nl2br($content), true);
             $date = date("Y-m-d");
 
             $insert_sql = "INSERT INTO `comments` (`id`, `post_id`, `content`, `author`, `date`) VALUES (null, $post_id, '$content', '$nick', '$date')";
