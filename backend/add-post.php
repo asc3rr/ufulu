@@ -5,7 +5,7 @@
         header("Location: login/");
     }
 
-    if(!isset($_POST['content']) && empty($_POST['content'])){
+    if(!isset($_POST['content']) || empty($_POST['content'])){
         header("Location: ../");
         die;
     }
